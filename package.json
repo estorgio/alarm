@@ -1,0 +1,81 @@
+{
+  "name": "alarm",
+  "version": "1.0.0",
+  "description": "Simple alarm app made with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "nodemon --exec electron .",
+    "make-cert": "electron-builder create-self-signed-cert -p \"Fortunato Estorgio\"",
+    "build": "rimraf dist && env-cmd electron-builder -w",
+    "deploy": "rimraf dist && env-cmd electron-builder -w -p \"onTagOrDraft\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estorgio/alarm.git"
+  },
+  "keywords": [
+    "alarm",
+    "electron"
+  ],
+  "author": "Fortunato Estorgio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/estorgio/alarm/issues"
+  },
+  "homepage": "https://github.com/estorgio/alarm#readme",
+  "dependencies": {
+    "electron-window-state": "^5.0.3",
+    "howler": "^2.1.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "electron": "^6.0.1",
+    "electron-builder": "^21.2.0",
+    "env-cmd": "^9.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^3.0.3",
+    "lint-staged": "^9.2.1",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{html,css,less,ejs}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "build": {
+    "appId": "com.estorgio.alarm",
+    "productName": "Alarm",
+    "directories": {
+      "buildResources": "./resources"
+    },
+    "win": {
+      "publish": [
+        "github"
+      ],
+      "verifyUpdateCodeSignature": false,
+      "publisherName": "Fortunato Estorgio"
+    },
+    "linux": {
+      "publish": [
+        "github"
+      ],
+      "category": "Utility"
+    }
+  }
+}

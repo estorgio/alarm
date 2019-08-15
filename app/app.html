@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'"
+    />
+    <title>Alarm</title>
+
+    <link rel="stylesheet" href="vendor/material-icons/font.css" />
+    <link rel="stylesheet" href="vendor/materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div id="alarm-list" class="row">
+      <div class="col s12">
+        <div class="collection">
+          <!-- <a class="collection-item" href="#!">
+            <span class="alarm-item">9:30 am</span>
+            <span>Alarm one</span>
+            <span class="secondary-content">
+              <div class="switch">
+                <label>
+                  <input type="checkbox" />
+                  <span class="lever"></span>
+                </label>
+              </div>
+            </span>
+          </a> -->
+        </div>
+
+        <div class="fixed-action-btn">
+          <a
+            id="btn-add-alarm"
+            class="btn-floating btn-large red waves-effect waves-light"
+          >
+            <i class="large material-icons">add</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="new-edit-alarm" class="container hide">
+      <div class="row">
+        <form class="col s12" action="#" method="POST">
+          <h4>Add alarm</h4>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="alarm-name" type="text" class="validate" required />
+              <label for="alarm-name">Subject</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                id="alarm-time"
+                type="text"
+                class="timepicker"
+                required
+                pattern="^(0[1-9]|1[0-2]):[0-5]\d\s{1}(AM|PM)$"
+                title="HH:MM AM/PM"
+              />
+              <label for="alarm-time">Time</label>
+            </div>
+          </div>
+          <button
+            id="new-alarm-save"
+            type="submit"
+            class="waves-effect waves-light btn"
+          >
+            Save
+          </button>
+          <button id="new-alarm-cancel" class="waves-effect waves-light btn">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="vendor/materialize/js/materialize.min.js"
+    ></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, {
+          direction: 'top',
+          hoverEnabled: false,
+        });
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.timepicker');
+        var instances = M.Timepicker.init(elems);
+      });
+    </script>
+    <script>
+      require('./app');
+      require('./tray');
+    </script>
+  </body>
+</html>

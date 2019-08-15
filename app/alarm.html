@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'"
+    />
+    <title>Alarm</title>
+
+    <link rel="stylesheet" href="vendor/material-icons/font.css" />
+    <link rel="stylesheet" href="vendor/materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="alarm-list" class="row">
+        <div class="col s12">
+          <div class="collection">
+            <!-- <a class="collection-item" href="#!">
+                  <span class="alarm-item">9:30 am</span>
+                  <span>Alarm one</span>
+                  <span class="secondary-content">
+                    <div class="switch">
+                      <label>
+                        <input type="checkbox" />
+                        <span class="lever"></span>
+                      </label>
+                    </div>
+                  </span>
+                </a> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <button id="dismiss" class="btn-large waves-effect waves-light">
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadAlarmList(list) {
+        const collection = document.querySelector('#alarm-list .collection');
+        collection.innerHTML = '';
+        list.forEach(item => {
+          const element = document.createElement('a');
+          element.classList.add('collection-item');
+          element.setAttribute('href', '#!');
+          element.setAttribute('data-id', item.id);
+          element.innerHTML = `
+            <span class="alarm-item">${item.time}</span>
+            <span>${item.name}</span>`;
+          collection.appendChild(element);
+        });
+      }
+      document.querySelector('#dismiss').addEventListener('click', () => {
+        const { remote } = require('electron');
+        const currentWindow = remote.getCurrentWindow();
+        currentWindow.close();
+      });
+    </script>
+  </body>
+</html>

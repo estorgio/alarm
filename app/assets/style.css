@@ -1,0 +1,14 @@
+html,
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.alarm-item {
+  font-size: 2em;
+  font-weight: 300;
+  margin-right: 10px;
+}
