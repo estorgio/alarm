@@ -4,6 +4,10 @@ const windowStateKeeper = require('electron-window-state');
 
 let mainWindow;
 
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
+
 function createWindow() {
   const state = windowStateKeeper({
     defaultWidth: 440,
@@ -48,4 +52,8 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow !== null) return;
   createWindow();
+});
+
+app.on('second-instance', () => {
+  if (mainWindow) mainWindow.show();
 });
