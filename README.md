@@ -6,6 +6,8 @@ A simple alarm app made with Electron.
 
 _For Windows 7/8/10 only_
 
+![screenshot](screenshot.png 'Alarm screenshot')
+
 ## License
 
 MIT
